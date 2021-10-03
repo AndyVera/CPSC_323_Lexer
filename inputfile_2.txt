@@ -1,0 +1,13 @@
+if ( i = 0 ) 
+{
+ int current = 4 ;
+ int previous = 5 ;
+ current = previous + current ;    
+} 
+if ( i = 1 )
+{
+    int current = 6 ;
+    int previous = 7 ;
+    current = previous + current ;
+}
+cout << currrent ;

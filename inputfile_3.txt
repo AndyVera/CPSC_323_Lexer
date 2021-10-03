@@ -1,0 +1,25 @@
+int i = 0 ;
+while ( i < 100) 
+{
+    if (i % 2 == 0)
+    {
+        cout << " It is an even number ";
+    }
+
+    else 
+    {
+        cout << " It is an odd number ";
+    }
+    i = i + 1 ;
+}
+
+int j = 0;
+cout << " Multiples of 5 are : ";
+while ( j < 100)
+{
+    if ( j % 5 == 0 ) {
+        cout << j ;
+    }
+
+    j = j + 1 ;
+}

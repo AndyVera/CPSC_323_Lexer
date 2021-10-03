@@ -9,6 +9,7 @@ int previous_state = 0;
 
 using namespace std;
 
+//library for keyword, separators and operators
 string keywords[14] = { "true","function","integer","false",	
 			            "boolean", "real","if",	"endif",
 			            "else",	"return","put",	"get","while"} ;
@@ -26,6 +27,7 @@ string operators[11] = {"<=",	 "+",		"-", 	"*",
 
 void Lexer(char input, ofstream& opout){
     
+    // implemeting the DFSM 
     int DFSM[5][4];
     DFSM[0][0] = 0; DFSM[0][1] = 1; DFSM[0][2] = 2; DFSM[0][3] = 3;
 
@@ -127,6 +129,14 @@ void Lexer(char input, ofstream& opout){
     characterread = '\0';
 }
 
+  else if (characterread == ' ' && current_state == 2 && (source.length() == 1)){
+        current_state = 0;
+        previous_state = 0;
+        opout << setw(16) << "Integer" << "|" << setw(17) << source << '\n';
+        source = '\0';
+        characterread = '\0';
+    }
+
 //When digits and a period has been entered
 
 if (isnumber(characterread) && current_state == 4){
@@ -152,7 +162,7 @@ if (characterread == '.' && current_state == 4){
     else if ((isspace(characterread) && (source.length() != 1))|| current_state == 3){
         if (previous_state == 1){
             int passing = 0;
-
+            //checks if indentifier is  a keyword
             for(int i = 0; i < 14; i++){
                 if (keywords[i].compare(source) == 0){
                 opout << setw(16) << "Keyword" << "|" << setw(17) << source << '\n';
@@ -164,7 +174,7 @@ if (characterread == '.' && current_state == 4){
                 }
                 passing = i+1;
             }
-
+            //if not a keyword, then it is an identifier
             if(passing == 14){
             opout << setw(16) << "Identifier" << "|" << setw(17) << source << '\n';
             source = "\0";
@@ -173,6 +183,7 @@ if (characterread == '.' && current_state == 4){
             previous_state = 0;
         }
         }
+        //checks if its an integer
         if (previous_state == 2){
             opout << setw(16) << "Integer" << "|" << setw(17) << source << '\n';
             source = "\0";
@@ -180,6 +191,7 @@ if (characterread == '.' && current_state == 4){
             current_state = 0;
             previous_state = 0;
         }
+        //checks if its a real
         if (previous_state == 4){
             opout << setw(16) << "Real" << "|" << setw(17) << source << '\n';
             source = "\0";
@@ -193,4 +205,3 @@ if (characterread == '.' && current_state == 4){
 }
 #endif /* LexicalAnalyzer_h */
 
-//while if IF WHILE get put Josh josh 345 3.456 3.4.4.

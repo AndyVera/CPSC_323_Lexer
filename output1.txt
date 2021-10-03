@@ -1,0 +1,9 @@
+    Token(s)    |    Lexeme(s)    
+------------------------------------
+         Keyword|            while
+       Separator|                (
+      Identifier|             fahr
+       Separator|                =
+         Integer|               23
+       Separator|                )
+       Separator|                ;
